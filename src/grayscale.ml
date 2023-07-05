@@ -1,9 +1,10 @@
 open Core
 
-(* You need to change the implementation of this function so that it does something
-   to the image instead of just leaving it untouched. *)
+(* You need to change the implementation of this function so that it does
+   something to the image instead of just leaving it untouched. *)
+
 let transform image =
-  image
+  Image.map image ~f:(fun (r, g, b) -> Pixel.of_int ((r + g + b) / 3))
 ;;
 
 let command =
@@ -20,5 +21,6 @@ let command =
         let image = Image.load_ppm ~filename |> transform in
         Image.save_ppm
           image
-          ~filename:(String.chop_suffix_exn filename ~suffix:".ppm" ^ "_gray.ppm")]
+          ~filename:
+            (String.chop_suffix_exn filename ~suffix:".ppm" ^ "_gray.ppm")]
 ;;
