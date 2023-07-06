@@ -3,7 +3,6 @@ open Core
 (* This should look familiar by now! *)
 let transform image =
   let gray = Grayscale.transform image in
-  let _copy = Image.copy gray in
   let max = Image.max_val gray in
   let height = Image.height gray in
   let width = Image.width gray in
