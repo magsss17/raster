@@ -36,8 +36,10 @@ let transform image threshold _radius : Image.t =
   let edit = Grayscale.transform image in
   let max = Float.of_int (Image.max_val edit) in
   Image.mapi edit ~f:(fun ~x ~y _ ->
-    let gradient = gradient edit x y in
-    if Float.compare (gradient /. max) (Float.of_int threshold /. 100.0) > 0
+    if Float.compare
+         (gradient edit x y /. max)
+         (Float.of_int threshold /. 100.0)
+       > 0
     then (
       Image.set edit ~x ~y (Pixel.of_int (Int.of_float max));
       print_s [%message "setting to max"])
