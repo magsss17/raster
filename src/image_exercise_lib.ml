@@ -9,5 +9,6 @@ let command =
     ; "dither", Dither.command
     ; "steganography", Steganography.command
     ; "solarization", Solarization.command
+    ; "edge", Edge.command
     ]
 ;;
