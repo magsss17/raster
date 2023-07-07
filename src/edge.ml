@@ -34,6 +34,7 @@ let gradient image x y : float =
 
 let transform image threshold radius : Image.t =
   let edit = Grayscale.transform image |> Blur.transform ~radius in
+  let new_image = Image.copy edit in
   let max = Float.of_int (Image.max_val edit) in
   Image.mapi edit ~f:(fun ~x ~y _ ->
     if Float.compare
@@ -41,12 +42,12 @@ let transform image threshold radius : Image.t =
          (Float.of_int threshold /. 100.0)
        > 0
     then (
-      Image.set edit ~x ~y (Pixel.of_int (Int.of_float max));
+      Image.set new_image ~x ~y (Pixel.of_int (Int.of_float max));
       print_s [%message "setting to max"])
     else (
       print_s [%message "setting to zero"];
-      Image.set edit ~x ~y Pixel.zero);
-    Image.get edit ~x ~y)
+      Image.set new_image ~x ~y Pixel.zero);
+    Image.get new_image ~x ~y)
 ;;
 
 let command =
