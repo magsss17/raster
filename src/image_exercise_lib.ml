@@ -10,5 +10,6 @@ let command =
     ; "steganography", Steganography.command
     ; "solarization", Solarization.command
     ; "edge", Edge.command
+    ; "mosaic", Mosaic.command
     ]
 ;;
